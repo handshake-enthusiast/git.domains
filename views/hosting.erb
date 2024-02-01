@@ -1,0 +1,55 @@
+<div class="container my-4">
+  <h1 class="mb-3">Hosting</h1>
+
+  <% if !@had_github_pages %>
+    <p class="fs-5 text-center mb-3">Looks like you don't have a Github Pages powered website yet. Let's set up one for you.</p>
+    <p class="fs-5 mb-3">Follow these steps:</p>
+    <ol class="mb-4">
+      <li class="fs-5">
+        Click <a href="<%= create_repo_url(@login) %>" target="_blank" class="link-primary">this link</a> to create a repo
+      </li>
+      <li class="fs-5">
+        On the repo creation page, click the "Create repository" button
+      </li>
+      <li class="fs-5">
+        Get back here and click the "Continue" button below
+      </li>
+    </ol>
+  <% elsif !@had_custom_domain %>
+    <p class="fs-5 mb-3">Looks like you already have a Github Pages powered website hosted on <%= @login %>.github.io</p>
+    <p class="fs-5 mb-3">Let's set up a .<%= DOMAIN %> domain for your website at least temporarily. Follow these steps:</p>
+    <ol class="mb-4">
+      <li class="fs-5">
+        <a href="<%= create_cname_file_url(@login, @default_branch) %>" target="_blank" class="link-primary">Click this link</a> to set up a .<%= DOMAIN %> domain for your website
+      </li>
+      <li class="fs-5">
+        Click the "Commit changes..." button on the file creation page in the upper right corner
+      </li>
+      <li class="fs-5">
+        Click the "Commit changes" button in the modal window
+      </li>
+      <li class="fs-5">
+        Click the button below
+      </li>
+    </ol>
+  <% else %>
+    <p class="fs-5 mb-4">Looks like you already have a Github Pages powered website hosted on a custom domain.</p>
+    <p class="fs-5 mb-3">Let's set up a .<%= DOMAIN %> domain for your website at least temporarily. Follow these steps:</p>
+    <ol class="mb-4">
+      <li class="fs-5">
+        <a href="<%= create_cname_file_url(@login, @default_branch) %>" target="_blank" class="link-primary">Click this link</a> to set up a .<%= DOMAIN %> domain for your website
+      </li>
+      <li class="fs-5">
+        Click the "Commit changes..." button on the file creation page in the upper right corner
+      </li>
+      <li class="fs-5">
+        Click the "Commit changes" button in the modal window
+      </li>
+      <li class="fs-5">
+        Click the button below
+      </li>
+    </ol>
+  <% end %>
+
+  <a href="/access" class="btn btn-primary btn-lg mt-3">Continue</a>
+</div>

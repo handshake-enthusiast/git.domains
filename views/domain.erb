@@ -1,0 +1,19 @@
+<div class="container my-4">
+  <h1 class="mb-3">Domain</h1>
+
+  <p class="fs-5 mb-3">Congratulations! You have successfully claimed <i><%= @login %>.<%= DOMAIN %></i> 🎉</p>
+
+  <div class="bg-dark text-white fs-5 p-3 my-3 text-start overflow-auto rounded">
+    <code>
+      <span class="text-info">$ dig @<%= DNS_SERVER_IP_ADDRESS %> <%= @login %>.<%= DOMAIN %> +short</span><br>
+      <span class="text-warning" style="--bs-text-opacity: .9;"><%= @login %>.github.io.</span><br>
+      <% GITHUB_PAGES_IP_ADDRESSES.each do |ip_address| %>
+        <span class="text-warning" style="--bs-text-opacity: .9;"><%= ip_address %></span><br>
+      <% end %>
+    </code>
+  </div>
+
+  <p class="fs-5 mb-4">At this stage, only Github Pages hosting is supported. Configure your own website in just a few seconds.</p>
+
+  <a href="/hosting" class="btn btn-primary btn-lg">Continue</a>
+</div>

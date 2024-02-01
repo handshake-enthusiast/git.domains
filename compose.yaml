@@ -1,0 +1,56 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    command: puma -w 2 --preload
+    ports:
+      - "9292:9292"
+    depends_on:
+      - redis
+      - db
+    environment:
+      REDIS_URL: "redis://redis:6379/0"
+      DB_HOST: db
+      DB_NAME: myapp_development
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_PORT: 5432
+
+  sidekiq:
+    build: .
+    depends_on:
+      - redis
+      - db
+    environment:
+      REDIS_URL: "redis://redis:6379/0"
+      DB_HOST: db
+      DB_NAME: myapp_development
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_PORT: 5432
+    command: bundle exec sidekiq -r ./app.rb
+    deploy:
+      replicas: 2
+
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  db:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: myapp_development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+  redis_data:

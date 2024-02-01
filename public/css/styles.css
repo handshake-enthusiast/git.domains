@@ -1,0 +1,35 @@
+.theme-icon-active {
+  width: 1.25em;
+  height: 1.25em;
+  fill: currentcolor;
+  display: inline-flex;
+}
+
+header,
+footer {
+  padding: 1rem 0;
+  /* Adjust padding to match visually */
+}
+
+.theme-icon-active,
+.text-secondary {
+  height: 1.25em;
+  /* Make sure both icons have the same height */
+  display: inline-flex;
+  align-items: center;
+  /* This will vertically center the svg within the button */
+  justify-content: center;
+  /* This will horizontally center the svg within the button */
+}
+
+/* Ensure the footer link has the same height and alignment as the header icon */
+footer a {
+  display: inline-flex;
+  align-items: center;
+  height: 1.25em;
+  /* Match the height of the header icon */
+  padding: 0;
+  /* Adjust padding if needed */
+  margin: 0;
+  /* Adjust margin if needed */
+}
